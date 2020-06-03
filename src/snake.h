@@ -2,7 +2,11 @@
 #define SNAKE_H
 
 #include <vector>
+#ifdef __WIN32__
 #include "SDL.h"
+#elif __linux__
+#include <SDL2/SDL.h>
+#endif
 
 class Snake {
  public:

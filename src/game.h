@@ -2,10 +2,14 @@
 #define GAME_H
 
 #include <random>
-#include "SDL.h"
 #include "controller.h"
 #include "renderer.h"
 #include "snake.h"
+#ifdef __WIN32__
+#include "SDL.h"
+#elif __linux__
+#include <SDL2/SDL.h>
+#endif
 
 class Game {
  public:
