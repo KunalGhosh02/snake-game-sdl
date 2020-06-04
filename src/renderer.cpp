@@ -47,9 +47,9 @@ void Renderer::Render(Map map, Snake const snake, SDL_Point const &food) {
     // Clear screen
     SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
     SDL_RenderClear(sdl_renderer);
-    
+
     // Render Map
-    map.RenderMap(sdl_renderer, grid_width, grid_height, &block);
+    map.RenderMap(sdl_renderer, &block);
 
     // Render food
     SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xCC, 0x00, 0xFF);

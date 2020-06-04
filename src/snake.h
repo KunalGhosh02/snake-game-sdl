@@ -21,7 +21,7 @@ class Snake {
           head_x(grid_width / 2),
           head_y(grid_height / 2) {}
 
-    void Update(std::vector<SDL_Point> current_map);
+    void Update(std::vector<SDL_Point> &&current_map);
 
     void GrowBody();
     bool SnakeCell(int x, int y);

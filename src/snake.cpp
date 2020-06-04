@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "map.h"
-void Snake::Update(std::vector<SDL_Point> current_map) {
+void Snake::Update(std::vector<SDL_Point> &&current_map) {
     SDL_Point prev_cell{
         static_cast<int>(head_x),
         static_cast<int>(

@@ -7,12 +7,9 @@
 #include <SDL2/SDL.h>
 #endif
 
-Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : snake(grid_width, grid_height),
-      engine(dev()),
-      random_w(0, static_cast<int>(grid_width - 1)),
-      random_h(0, static_cast<int>(grid_height - 1)) {
-    PlaceFood();
+Game::Game(std::size_t grid_width, std::size_t grid_height, std::string map_path)
+    : snake(grid_width, grid_height), map(map_path), engine(dev()), random_w(0, static_cast<int>(grid_width - 1)), random_h(0, static_cast<int>(grid_height - 1)) {
+        PlaceFood();
 }
 
 void Game::Run(Controller const &controller, Renderer &renderer,
@@ -61,7 +58,7 @@ void Game::PlaceFood() {
     while (true) {
         x = random_w(engine);
         y = random_h(engine);
-        // Check that the location is not occupied by a snake item before placing
+        // Check that the location is not occupied by a snake or Map block item before placing
         // food.
         if (!snake.SnakeCell(x, y) && !map.MapCell(x, y)) {
             food.x = x;
@@ -74,7 +71,7 @@ void Game::PlaceFood() {
 void Game::Update() {
     if (!snake.alive) return;
 
-    snake.Update(map.getMap());
+    snake.Update(std::move((map.getMap())));
 
     int new_x = static_cast<int>(snake.head_x);
     int new_y = static_cast<int>(snake.head_y);
