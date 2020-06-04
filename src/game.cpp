@@ -9,7 +9,8 @@
 
 Game::Game(std::size_t grid_width, std::size_t grid_height, std::string map_path)
     : snake(grid_width, grid_height), map(map_path), engine(dev()), random_w(0, static_cast<int>(grid_width - 1)), random_h(0, static_cast<int>(grid_height - 1)) {
-        PlaceFood();
+    map.LoadMap();
+    PlaceFood();
 }
 
 void Game::Run(Controller const &controller, Renderer &renderer,
@@ -20,7 +21,6 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     Uint32 frame_duration;
     int frame_count = 0;
     bool running = true;
-    map.LoadMap();
 
     while (running) {
         frame_start = SDL_GetTicks();
