@@ -1,12 +1,20 @@
-# CPPND: Capstone Snake Game Example
-
-This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The code for this repo was inspired by [this](https://codereview.stackexchange.com/questions/212296/snake-game-in-c-with-sdl) excellent StackOverflow post and set of responses.
+# Snake Game using libsdl2
 
 <img src="snake_game.gif"/>
 
-The Capstone Project gives you a chance to integrate what you've learned throughout this program. This project will become an important part of your portfolio to share with current and future colleagues and employers.
+Extended snake game to support custom maps and ability to create maps using tilemaps.
 
-In this project, you can build your own C++ application or extend this Snake game, following the principles you have learned throughout this Nanodegree Program. This project will demonstrate that you can independently create applications using a wide range of C++ features.
+## What's new?
+
+<img src="feature_map.png">
+
+* You can now create custom maps for the game.
+* The map is saved in a text file.
+* The map is a 32x32 grid of elements.
+* Each element in the map is a 0 or 1 which represent a block of a maze and blank space respectivly.
+* See running instructions for steps on how to load a custom created map.
+* The map directory contains a couple of example maps. If no map is specefied the game will load map.map from map directory by default.
+* If no map is specefied normal game will start without any maze.
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
@@ -28,4 +36,24 @@ In this project, you can build your own C++ application or extend this Snake gam
 1. Clone this repo.
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
-4. Run it: `./SnakeGame`.
+
+## Running
+
+1. Run it: `./SnakeGame`.
+2. You can specify a map file using `-m ` flag and spcefiy a .map file.
+    
+    Example: `./SnakeGame -m ../maps/map2.map`
+
+## Rubric points covered
+
+| Point                                                                                          | is Covered |
+|------------------------------------------------------------------------------------------------|------------|
+| The project demonstrates an understanding of C++ functions and control structures.             | yes        |
+| The project reads data from a file and process the data, or the program writes data to a file. | yes [map is loaded from a file saved in disk] |
+| The project accepts user input and processes the input.| yes [accepts user input for map file path]|
+| The project uses Object Oriented Programming techniques.| yes|
+|Classes use appropriate access specifiers for class members.|yes [each member is marked explicitly in map class in map.h]|
+|Class constructors utilize member initialization lists.|yes [map path is passed using initializer list]|
+|Classes encapsulate behavior.| yes [map class encapsulates all map related behavior]|
+|The project makes use of references in function declarations.| yes [renderer is passed using reference]|
+|The project uses move semantics to move data, instead of copying it, where possible.|  yes [std::move is used to move an rvalue in game.cpp]|
