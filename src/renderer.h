@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "map.h"
 #include "snake.h"
 #ifdef __WIN32__
 #include "SDL.h"
@@ -16,7 +17,7 @@ class Renderer {
              const std::size_t grid_width, const std::size_t grid_height);
     ~Renderer();
 
-    void Render(Snake const snake, SDL_Point const &food);
+    void Render(Map map, Snake const snake, SDL_Point const &food);
     void UpdateWindowTitle(int score, int fps);
 
    private:

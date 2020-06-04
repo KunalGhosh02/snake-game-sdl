@@ -10,8 +10,8 @@
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height),
       engine(dev()),
-      random_w(0, static_cast<int>(grid_width)),
-      random_h(0, static_cast<int>(grid_height)) {
+      random_w(0, static_cast<int>(grid_width - 1)),
+      random_h(0, static_cast<int>(grid_height - 1)) {
     PlaceFood();
 }
 
@@ -23,6 +23,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     Uint32 frame_duration;
     int frame_count = 0;
     bool running = true;
+    map.LoadMap();
 
     while (running) {
         frame_start = SDL_GetTicks();
@@ -30,7 +31,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
         // Input, Update, Render - the main game loop.
         controller.HandleInput(running, snake);
         Update();
-        renderer.Render(snake, food);
+        renderer.Render(map, snake, food);
 
         frame_end = SDL_GetTicks();
 
@@ -62,7 +63,7 @@ void Game::PlaceFood() {
         y = random_h(engine);
         // Check that the location is not occupied by a snake item before placing
         // food.
-        if (!snake.SnakeCell(x, y)) {
+        if (!snake.SnakeCell(x, y) && !map.MapCell(x, y)) {
             food.x = x;
             food.y = y;
             return;
@@ -73,7 +74,7 @@ void Game::PlaceFood() {
 void Game::Update() {
     if (!snake.alive) return;
 
-    snake.Update();
+    snake.Update(map.getMap());
 
     int new_x = static_cast<int>(snake.head_x);
     int new_y = static_cast<int>(snake.head_y);
